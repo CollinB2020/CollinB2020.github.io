@@ -136,6 +136,15 @@ Promise.all([
     var maxCovidMortality = d3.max(dataset, function(d) { return parseInt(d.new_covid_mortality) / 100.0; });
     var maxInfluenzaMortality = d3.max(dataset, function(d) { return parseInt(d.new_influenza_mortality) / 100.0; });
 
+    // Draw a circular border around the globe
+    svg.append("circle")
+        .attr("cx", 200) // X coordinate of the center
+        .attr("cy", 200) // Y coordinate of the center
+        .attr("r", 200) // Radius of the circle
+        .attr("fill", "white") // No fill
+        .attr("stroke", "black") // Border color
+        .attr("stroke-width", 0.5); // Border width
+
     // Select the tooltip element
     var tooltip = d3.select("#tooltip");
 
@@ -278,15 +287,6 @@ Promise.all([
 
     // Set interval to update map every 1 seconds
     intervalId = setInterval(updateMap, 1000);
-
-    // Draw a circular border around the globe
-    svg.append("circle")
-        .attr("cx", 200) // X coordinate of the center
-        .attr("cy", 200) // Y coordinate of the center
-        .attr("r", 200) // Radius of the circle
-        .attr("fill", "none") // No fill
-        .attr("stroke", "black") // Border color
-        .attr("stroke-width", 0.5); // Border width
 
     // Enable globe rotation
     var m0, o0;
