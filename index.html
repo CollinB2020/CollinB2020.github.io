@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="data:,">
+    <meta charset="UTF-8">
+    <title>Interactive Globe Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #globe-container {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #controls {
+            padding: 10px 20px;
+            margin: 20px;
+            display: inline-block;
+            align-items: center;
+            flex-shrink: 0;
+            flex-grow: 0;
+            width: 250px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 10px 10px 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #current-date {
+            font-size: 28px;
+            margin-left: 10px;
+        }
+        #svg1 {
+            width: 400px;
+            height: 400px;
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+        /* CSS styling for the map */
+        path {
+            stroke: black;
+            stroke-width: 0.5;
+            /*fill: #cce5ff;*/
+        }
+        path:hover {
+            stroke: #3366ff; /* New outline color */
+            stroke-width: 2px;
+            stroke-opacity: 0.8;
+        }
+        .legend text {
+            font-family: sans-serif;
+            font-size: 12px;
+        }
+        #legend {
+            display: inline-block;
+        }
+        #gradient-rectangle {
+            position: absolute; 
+            width: 200px;
+            height: 200px;
+            background: 
+                linear-gradient(to top left, #0055cc, transparent),
+                linear-gradient(to bottom right, #ff6600, transparent),
+                linear-gradient(to top right, white, transparent);
+            background-blend-mode: overlay;
+            margin: 20px 30px 30px 40px;
+        }
+        .tooltip {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            pointer-events: none;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="title">Global COVID and Influenza Comparison</div>
+        <div id="globe-container">
+            <div id="controls">
+                <button id="toggleButton" style="margin: 0px 0px 50px 0px; background-color: #ff0000;">Visualize Mortality Rates</button>
+                <p id="current-date" style="display: block;">Current Date: </p>
+                <button id="backButton" style="display: block;">Back</button>
+                <button id="playPauseButton" style="display: block;">Play/Pause</button>
+                <button id="forwardButton" style="display: block;">Forward</button>
+            </div>
+            <svg id="svg1"></svg>
+            <div style="position: relative; width: 270px; height: 250px;">
+                <div id="gradient-rectangle"></div>
+                <svg id="legend" style="position: absolute;"></svg>
+                <!-- X-axis label -->
+                <div id="legend-x-label" style="position: absolute; left: 50%; bottom: -40px; transform: translateX(-50%); text-align: center;">
+                    <span>X-axis Label</span>
+                </div>
+                <!-- Y-axis label -->
+                <div id="legend-y-label" style="position: absolute; top: 50%; left: -60px; transform: translateY(-50%); text-align: center; writing-mode: vertical-lr;">
+                    <span>Y-axis Label</span>
+                </div>
+            </div>
+
+            
+            <div id="tooltip" class="tooltip">
+                <div id="countryName"></div>
+                <div id="covidValue"></div>
+                <div id="influenzaValue"></div>
+            </div>
+            
+    </div>
+    <script src="visualization.js"></script>
+</body>
+</html>
