@@ -241,17 +241,20 @@ Promise.all([
 
                     var colorValue1, colorValue2;
                     if (isShowingNewCases) {
-                        colorValue2 = parseFloat(countryData.new_influenza_cases) / maxCovidCases;
-                        colorValue1 = parseFloat(countryData.new_covid_cases) / maxInfluenzaCases;
+                        colorValue2 = parseFloat(countryData.new_influenza_cases / 100.0) / maxCovidCases;
+                        colorValue1 = parseFloat(countryData.new_covid_cases / 1000.0) / maxInfluenzaCases;
                     } else {
-                        colorValue2 = parseFloat(countryData.new_covid_mortality) / maxCovidMortality;
-                        colorValue1 = parseFloat(countryData.new_influenza_mortality) / maxCovidMortality;
+                        colorValue2 = parseFloat(countryData.new_covid_mortality / 100.0) / maxCovidMortality;
+                        colorValue1 = parseFloat(countryData.new_influenza_mortality / 100.0) / maxCovidMortality;
                     } 
 
                     // Blend the two colors based on the two data values
                     var color1 = colorScale1(colorValue1);
                     var color2 = colorScale2(colorValue2);
                     var blendedColor = d3.interpolate(color1, color2)(0.5); // Blend with equal weight
+
+                    //console.log(colorValue1);
+                    //console.log(colorValue2);
 
                     return blendedColor;
                 } else {
