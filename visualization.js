@@ -244,8 +244,8 @@ Promise.all([
                         colorValue2 = Math.pow(parseFloat(countryData.new_influenza_cases / 100.0) / maxCovidCases, 0.35);
                         colorValue1 = Math.pow(parseFloat(countryData.new_covid_cases / 1000.0) / maxInfluenzaCases, 0.35);
                     } else {
-                        colorValue2 = Math.pow(parseFloat(countryData.new_covid_mortality / 100.0) / maxCovidMortality, 0.35);
-                        colorValue1 = Math.pow(parseFloat(countryData.new_influenza_mortality / 100.0) / maxCovidMortality, 0.35);
+                        colorValue2 = Math.pow(parseFloat(countryData.new_influenza_mortality / 100.0) / maxCovidMortality, 0.35);
+                        colorValue1 = Math.pow(parseFloat(countryData.new_covid_mortality / 100.0) / maxCovidMortality, 0.35);
                     } 
 
                     // Ensure the color values stay within the range of 0 to 1
